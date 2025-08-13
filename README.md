@@ -5,7 +5,13 @@ This repository contains the official implementation of **CrystalDiT**, a simpli
 ## 📄 Paper
 
 **CrystalDiT: A Diffusion Transformer for Crystal Generation**  
-*Anonymous Submission*
+Xiaohan Yi, Guikun Xu, Xi Xiao, Zhong Zhang, Liu Liu, Yatao Bian, Peilin Zhao
+
+## 🚀 Coming Soon
+
+- **🤖 Pre-trained Models**: Model checkpoints will be released upon paper acceptance
+- **💎 Generated Structures**: Complete set of generated CIF files for reproducibility
+
 
 ## 🌟 Key Features
 
