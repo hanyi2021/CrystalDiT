@@ -1,0 +1,11 @@
+torch==2.5.1
+numpy==1.26.4
+pandas==2.2.3
+matplotlib==3.9.4
+scipy==1.13.1
+tqdm==4.67.1
+timm==1.0.15
+pymatgen==2024.8.9
+ase==3.22.1
+chgnet==0.3.1
+smact==2.2.1
