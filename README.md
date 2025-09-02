@@ -35,6 +35,7 @@ Xiaohan Yi, Guikun Xu, Xi Xiao, Zhong Zhang, Liu Liu, Yatao Bian, Peilin Zhao
 │   ├── diffusion_utils.py
 │   ├── gaussian_diffusion.py
 │   ├── respace.py
+│   ├── models.py
 │   └── timestep_sampler.py
 ├── eval_script/                       # Evaluation and analysis scripts
 │   ├── balance_score_calculator.py    # Balance Score calculation
