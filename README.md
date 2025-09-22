@@ -2,25 +2,33 @@
 
 This repository contains the official implementation of **CrystalDiT**, a simplified diffusion transformer architecture for crystal structure generation that achieves state-of-the-art performance by treating lattice and atomic properties as a single, interdependent system.
 
-## 📄 Paper
+## Paper
 
 **CrystalDiT: A Diffusion Transformer for Crystal Generation**  
 Xiaohan Yi, Guikun Xu, Xi Xiao, Zhong Zhang, Liu Liu, Yatao Bian, Peilin Zhao
 
-## 🚀 Coming Soon
+**ArXiv**: [https://arxiv.org/abs/2508.16614](https://arxiv.org/abs/2508.16614)
 
-- **🤖 Pre-trained Models**: Model checkpoints will be released upon paper acceptance
-- **💎 Generated Structures**: Complete set of generated CIF files for reproducibility
+## Pre-trained Models and Generated Structures
 
+**Hugging Face Model**: [https://huggingface.co/xiaohan-yi/CrystalDiT](https://huggingface.co/xiaohan-yi/CrystalDiT)
 
-## 🌟 Key Features
+Our Hugging Face repository provides:
+- **Pre-trained model checkpoint**: Best-performing model selected via Balance Score methodology
+- **Generated crystal structures**: 10,000 CIF structures from CrystalDiT and all baseline methods
+  - CrystalDiT_crystals (our method)
+  - flowmm_crystals, mattergen_crystals, ADiT_crystals_mp20
+  - diffcep_crystals, diffcsp-pp_crystals
+- All structures used for comparative evaluation in our paper
+
+## Key Features
 
 - **Simplified Architecture**: Unified diffusion transformer with joint attention processing
 - **Chemical Representation**: Two-dimensional atomic encoding using periodic table positions  
 - **Balanced Evaluation**: Novel Balance Score for optimizing discovery potential vs. generation quality
 - **State-of-the-art Results**: 9.62% SUN rate on MP-20, outperforming FlowMM (4.38%) and MatterGen (3.42%)
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 .
@@ -29,7 +37,10 @@ Xiaohan Yi, Guikun Xu, Xi Xiao, Zhong Zhang, Liu Liu, Yatao Bian, Peilin Zhao
 ├── crystal_dit.py                     # CrystalDiT model architecture
 ├── crystal_representation.py          # Crystal data processing and representation
 ├── datasets/
-│   └── mp_20/                         # MP-20 dataset (to be downloaded)
+│   └── mp_20/                         # MP-20 dataset
+│       ├── train.csv
+│       ├── val.csv
+│       └── test.csv
 ├── diffusion/                         # DiT diffusion utilities (from Meta DiT)
 │   ├── __init__.py
 │   ├── diffusion_utils.py
@@ -49,7 +60,7 @@ Xiaohan Yi, Guikun Xu, Xi Xiao, Zhong Zhang, Liu Liu, Yatao Bian, Peilin Zhao
 └── train_crystal_dit.py              # Training script
 ```
 
-## 📋 Requirements
+## Requirements
 
 ```bash
 pip install -r requirements.txt
@@ -64,12 +75,11 @@ Key dependencies:
 - chgnet==0.3.1
 - timm==1.0.15
 
-## 📂 Data Preparation
+## Data Preparation
 
-Due to supplement material size limitations, the following data files need to be downloaded separately:
+### MP-20 Dataset
 
-### 1. MP-20 Dataset
-Download the MP-20 dataset and place it in `datasets/mp_20/`:
+The MP-20 dataset is included in this repository under `datasets/mp_20/` with the following files:
 ```
 datasets/mp_20/
 ├── train.csv
@@ -77,15 +87,16 @@ datasets/mp_20/
 └── test.csv
 ```
 
-**Download Source**: [CDVAE Repository](https://github.com/txie-93/cdvae) or [Materials Project](https://materialsproject.org/)
+### Additional Required Data
 
-### 2. Materials Project Hull Data
+For complete evaluation pipeline, you will need:
+
+#### Materials Project Hull Data
 Download the Materials Project convex hull data for stability evaluation:
-
 
 **Download Source**: [Matbench Discovery](https://matbench-discovery.materialsproject.org/)
 
-### 3. VASP Pseudopotentials
+#### VASP Pseudopotentials
 Configure pymatgen for VASP calculations:
 ```bash
 # Download VASP pseudopotentials and configure pymatgen
@@ -95,7 +106,7 @@ pmg config --add PMG_VASP_PSP_DIR $(pwd)
 
 **Required**: POT_GGA_PAW_PBE pseudopotential directory
 
-## 🚀 Complete Workflow
+## Complete Workflow
 
 Our complete evaluation pipeline consists of the following stages:
 
@@ -179,7 +190,7 @@ Run VASP calculations using the generated input files:
 ```
 
 #### 5.3 Create Trajectory Files for Post-processing
-、
+
 ```bash
 # Convert VASP outputs to ASE trajectory files
 python eval_script/create_traj_for_ehull.py \
@@ -199,7 +210,7 @@ python eval_script/dft_post_processor.py \
     --output_dir ./final_results
 ```
 
-## 📊 Evaluation Metrics
+## Evaluation Metrics
 
 Our evaluation framework includes:
 
@@ -208,7 +219,7 @@ Our evaluation framework includes:
 - **Discovery Metrics**: Uniqueness, Novelty, UN Rate
 - **Stability Metrics**: SUN Rate (Stable, Unique, Novel), MSUN Rate (Metastable, Unique, Novel)
 
-## 🔧 Key Components
+## Key Components
 
 ### CrystalDiT Architecture
 
@@ -226,7 +237,7 @@ Balance Score = UN Rate × (Quality Composite)^α
 
 Where Quality Composite combines structural validity, compositional validity, density distribution, and element distribution scores.
 
-## 📈 Results
+## Results
 
 | Method | SUN (%) | MSUN (%) | UN Rate (%) |
 |---------|---------|----------|-------------|
@@ -235,20 +246,34 @@ Where Quality Composite combines structural validity, compositional validity, de
 | ADiT | 2.74 | 13.50 | 37.08 |
 | **CrystalDiT** | **9.62** | **25.94** | **63.28** |
 
-## 🎯 Baseline Comparison
+## Baseline Comparison
 
-Due to supplement size limitations, baseline method implementations and generated structures can be provided upon request. The `baseline/` directory contains implementations for:
+The `baseline/` directory contains implementations for:
 - DiffCSP
 - FlowMM  
 - DiffCSP++
 - MatterGen
 - ADiT
 
-## 🔄 Ablation Studies
+Generated structures from all baseline methods (10,000 each) are available on our [Hugging Face repository](https://huggingface.co/xiaohan-yi/CrystalDiT) for direct comparison without requiring baseline reproduction.
+
+## Ablation Studies
 
 Ablation study results (including 1D atomic representation variant) are available in the evaluation results. Generated CIF files for ablation studies can be provided upon request due to size constraints.
 
-## 📜 License and Attribution
+## Citation
+
+```bibtex
+@article{yi2024crystaldit,
+  title={CrystalDiT: A Diffusion Transformer for Crystal Generation},
+  author={Yi, Xiaohan and Xu, Guikun and Xiao, Xi and Zhang, Zhong and Liu, Liu and Bian, Yatao and Zhao, Peilin},
+  journal={arXiv preprint arXiv:2508.16614},
+  year={2024},
+  url={https://arxiv.org/abs/2508.16614}
+}
+```
+
+## License and Attribution
 
 ### CrystalDiT Code
 This project is licensed under the MIT License.
