@@ -32,7 +32,6 @@ Our Hugging Face repository provides:
 
 ```
 .
-├── baseline/                           # Baseline method implementations
 ├── crystal_diffusion.py               # Gaussian diffusion process for crystals
 ├── crystal_dit.py                     # CrystalDiT model architecture
 ├── crystal_representation.py          # Crystal data processing and representation
@@ -246,20 +245,10 @@ Where Quality Composite combines structural validity, compositional validity, de
 | ADiT | 2.74 | 13.50 | 37.08 |
 | **CrystalDiT** | **9.62** | **25.94** | **63.28** |
 
-## Baseline Comparison
 
-The `baseline/` directory contains implementations for:
-- DiffCSP
-- FlowMM  
-- DiffCSP++
-- MatterGen
-- ADiT
 
 Generated structures from all baseline methods (10,000 each) are available on our [Hugging Face repository](https://huggingface.co/xiaohan-yi/CrystalDiT) for direct comparison without requiring baseline reproduction.
 
-## Ablation Studies
-
-Ablation study results (including 1D atomic representation variant) are available in the evaluation results. Generated CIF files for ablation studies can be provided upon request due to size constraints.
 
 ## Citation
 
