@@ -160,10 +160,9 @@ python scripts/prepare_mp20.py --output_dir data/mp20/
 
 ## Model Checkpoints
 
-Download pretrained models from [Google Drive](YOUR_GOOGLE_DRIVE_LINK) or [Hugging Face](YOUR_HF_LINK):
+Download pretrained models from [Hugging Face](https://huggingface.co/xiaohan-yi/CrystalDiT):
 
 - `crystaldit_simple.pt` - Main model (330MB)
-- `crystaldit_complex.pt` - Dual-stream variant (370MB)
 
 ## Project Structure
 ```
